@@ -3140,6 +3140,9 @@ NetworkOPsImp::transJson(
         jvObj[jss::ledger_current_index] = ledger->info().seq;
     }
 
+    if (auto const netid = app_.overlay().networkID())
+        jvObj[jss::network_id] = static_cast<Json::UInt>(*netid);
+
     jvObj[jss::status] = validated ? "closed" : "proposed";
     jvObj[jss::engine_result] = sToken;
     jvObj[jss::engine_result_code] = result;
